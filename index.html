@@ -1,48 +1,156 @@
 <!doctype html>
 <html lang="es">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>Club Atletismo Sierra Nevada - Granada</title>
-		<!-- Google Fonts: Poppins + Oswald -->
-		<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
-			<style>
-				body{margin:0;font-family:Poppins, Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial;background:#f4f6f8;color:#111}
-				/* Header overlay to let hero occupy full viewport */
-				header{position:absolute;top:0;left:0;width:100%;background:transparent;border-bottom:0;z-index:20}
-			.container{width:min(1100px,94%);margin:0 auto}
-			.nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
-			.brand{display:flex;align-items:center;gap:12px;font-family:Poppins, sans-serif}
-			.logo{width:48px;height:48px;border-radius:8px;background:linear-gradient(135deg,#06b6d4,#7c3aed);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700}
-			.hero{position:relative;height:100vh;min-height:100vh;display:flex;align-items:center}
-			.hero img{position:absolute;inset:0;width:100%;height:100vh;object-fit:cover}
-			.hero .overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.25),rgba(0,0,0,0.45))}
-			.hero .content{position:relative;z-index:2;color:#fff;padding:28px;font-family:Poppins, sans-serif}
-			.hero h1{font-size:clamp(2rem,5vw,4rem);margin:0;font-family:Oswald, 'Poppins', sans-serif;font-weight:700;letter-spacing:0.5px}
-		</style>
-	</head>
-	<body>
-		<header>
-			<div class="container nav">
-				<div class="brand">
-					<div class="logo">SN</div>
-					<div>
-						<div style="font-weight:800">Club Atletismo Sierra Nevada</div>
-						<div style="font-size:12px;color:#666">Granada</div>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Club de Atletismo Alhambra</title>
+	<meta name="description" content="Club de Atletismo Alhambra - Sitio oficial" />
+	<style>
+		/* Estilos para hero full-screen */
+		:root{--cta-color:#cf0000;--cta-text:#04283a}
+		html,body{height:100%;margin:0;font-family:Inter,Segoe UI,Arial,sans-serif}
+		.hero{
+			height:100vh;
+			width:100%;
+			display:flex;
+			align-items:center;
+			justify-content:center;
+			color:#ffffff;
+			text-align:center;
+			background-image:url(https://centroatletismotenerife.net/wp-content/uploads/2022/03/banner-atletismo-adultos.jpg);
+			background-size:cover;
+			background-position:center center;
+			position:relative;
+		}
+		.overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.45),rgba(0,0,0,0.55));}
+		.hero-content{position:relative;z-index:2;padding:20px;max-width:1100px}
+		.title{font-size:clamp(28px,6vw,64px);font-weight:800;letter-spacing:0.5px;margin:0}
+		.subtitle{margin-top:12px;color:rgba(255,255,255,0.9);font-size:18px}
+		/* Botón principal - usa la variable --cta-color */
+		.cta{display:inline-block;margin-top:20px;padding:12px 18px;background:var(--cta-color);color:var(--cta-text);border-radius:8px;text-decoration:none;font-weight:700}
+		/* Variante alternativa: fondo semitransparente oscuro detrás del texto */
+		.cta-alt{background:rgba(0,0,0,0.45);color:#fff;border:1px solid rgba(255,255,255,0.08)}
+
+		/* Menú top-right */
+		.topnav{position:absolute;top:18px;right:24px;z-index:5;display:flex;align-items:center;gap:12px}
+		.topnav #menu-toggle{display:none;background:transparent;border:0;color:#fff;font-size:22px;cursor:pointer}
+		.menu-list{list-style:none;margin:0;padding:0;display:flex;gap:14px}
+		.menu-list a{color:rgba(255,255,255,0.95);text-decoration:none;padding:8px 10px;border-radius:6px;transition:background .18s,color .18s}
+		/* Usar mismo color que el botón "Únete al club" en hover/active */
+		.menu-list a:hover, .menu-list a:focus, .menu-list a.active{background:var(--cta-color);color:var(--cta-text)}
+		.menu-list a:hover{outline:none}
+
+		/* Logo top-left (removed small logo) - keep class for future use */
+		.logo{display:none}
+
+		/* Top bar layout similar to the provided photo */
+		/* bajar el menú ligeramente (aprox 1cm) -> ahora subido 0.5cm */
+		.site-top{position:absolute;top:29px;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:0 36px;z-index:6}
+		.site-top .main-menu ul{display:flex;gap:22px;margin:0;padding:0;list-style:none}
+		.site-top .main-menu a{color:rgba(255,255,255,0.95);text-decoration:none;font-weight:600}
+		.site-top .contact-right{color:rgba(255,255,255,0.85);display:flex;gap:18px;align-items:center;font-size:14px}
+
+		/* Hero inner: left skewed panel + right headline */
+		.hero-inner{display:grid;grid-template-columns:420px 1fr;gap:24px;align-items:center;width:100%;max-width:1200px;margin:0 auto;padding:40px 24px}
+		.left-panel{transform:skewX(-12deg);background:rgba(10,10,10,0.75);border-radius:6px;padding:28px 36px}
+		.left-panel .panel-content{transform:skewX(12deg);color:#fff;display:flex;flex-direction:row;align-items:center;gap:18px}
+		.left-panel .small{letter-spacing:2px;opacity:0.9}
+		.left-panel .big-logo img{width:160px;height:auto;display:block}
+
+		.right-panel .hero-headline{font-size:64px;margin:0;font-weight:800;line-height:0.95;text-align:right}
+		.right-panel .muted{font-size:28px;opacity:0.95}
+
+		@media (max-width:900px){
+			.hero-inner{grid-template-columns:1fr;}
+			.left-panel{transform:none}
+			.left-panel .panel-content{transform:none;flex-direction:column;align-items:flex-start}
+			.right-panel .hero-headline{text-align:left;font-size:34px}
+			.site-top{padding:0 16px}
+		}
+
+		@media (max-width:800px){
+			.topnav{right:14px;top:14px}
+			.topnav #menu-toggle{display:inline-block}
+			.menu-list{position:absolute;top:56px;right:0;flex-direction:column;background:linear-gradient(180deg,rgba(0,0,0,0.6),rgba(0,0,0,0.55));padding:8px;border-radius:8px;min-width:160px;display:none}
+			.menu-list a{padding:10px 14px}
+			.title{font-size:28px}
+			.subtitle{font-size:15px}
+		}
+	</style>
+</head>
+<body>
+	<header class="hero" role="banner">
+		<div class="site-top">
+			<a href="#" class="logo" aria-label="Club de Atletismo Alhambra">
+				<img src="assets/img/granada-skyline.svg" alt="Granada skyline logo (small)">
+			</a>
+
+			<nav class="main-menu" role="navigation" aria-label="Menú principal">
+				<ul>
+					<li><a href="#home">Home</a></li>
+					<li><a href="#el-club">El Club</a></li>
+					<li><a href="#noticias">Noticias</a></li>
+					<li><a href="#galerias">Galerías</a></li>
+					<li><a href="#inscribete">Inscríbete</a></li>
+				</ul>
+			</nav>
+
+			<div class="contact-right">
+				<div class="contact-item">Teléfono <strong>+34 637 807 307</strong></div>
+				<div class="contact-item">secretaria@atletismogranadajoven.com</div>
+			</div>
+		</div>
+
+		<div class="overlay" aria-hidden="true"></div>
+
+		<div class="hero-inner">
+			<div class="left-panel">
+				<div class="panel-content">
+					<div class="small">BIENVENIDO A</div>
+					<div class="big-logo">
+						<img src="assets/img/granada-skyline.svg" alt="Granada skyline logo (large)">
 					</div>
 				</div>
 			</div>
-		</header>
-
-		<!-- Hero: sustituye images/hero.jpg por tu imagen local
-				 Puedes colocar una imagen en c:\pcardel1205.github.io\pcardel1205.github.io\images\hero.jpg
-				 o cambiar el atributo src abajo por la ruta/URL que prefieras. -->
-		<section class="hero" id="home">
-			<img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YXRsZXRpc21vfGVufDB8fDB8fHww" alt="Atletas corriendo - imagen editable" onerror="this.src='https://picsum.photos/seed/atletismo/1600/900'"/>
-			<div class="overlay"></div>
-			<div class="container content">
-				<h1>Club Atletismo Sierra Nevada - Granada</h1>
+			<div class="right-panel">
+				<h1 class="hero-headline">Entrena, crece, compite...<br><span class="muted">Disfruta con tus amigos</span></h1>
 			</div>
-		</section>
-	</body>
+		</div>
+	</header>
+
+	<style>
+		/* Smooth scroll for anchor navigation */
+		html{scroll-behavior:smooth}
+		.section{padding:80px 20px;max-width:1100px;margin:0 auto}
+		.section h2{font-size:28px;margin-bottom:12px}
+		.section p{color:rgba(0,0,0,0.75)}
+	</style>
+
+	<!-- Secciones ancladas -->
+	<section id="home" class="section" style="background:transparent;">
+		<h2>Home</h2>
+		<p>Sección de inicio. Puedes personalizar este contenido.</p>
+	</section>
+
+	<section id="el-club" class="section">
+		<h2>El Club</h2>
+		<p>Información sobre el club, historia, entrenamientos y entrenadores.</p>
+	</section>
+
+	<section id="noticias" class="section">
+		<h2>Noticias</h2>
+		<p>Últimas noticias y comunicados.</p>
+	</section>
+
+	<section id="galerias" class="section">
+		<h2>Galerías</h2>
+		<p>Fotos y vídeos de eventos y competiciones.</p>
+	</section>
+
+	<section id="inscribete" class="section">
+		<h2>Inscríbete</h2>
+		<p>Formulario de inscripción e información para nuevos miembros.</p>
+	</section>
+
+</body>
 </html>
