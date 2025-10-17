@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="es">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Club de Atletismo Alhambra</title>
+	<meta name="description" content="Club de Atletismo Alhambra - Sitio oficial" />
+	<style>
+		/* Estilos para hero full-screen */
+		:root{--cta-color:#cf0000;--cta-text:#04283a}
+		html,body{height:100%;margin:0;font-family:Inter,Segoe UI,Arial,sans-serif}
+		.hero{
+			height:100vh;
+			width:100%;
+			display:flex;
+			align-items:center;
+			justify-content:center;
+			color:#ffffff;
+			text-align:center;
+			background-image:url(https://centroatletismotenerife.net/wp-content/uploads/2022/03/banner-atletismo-adultos.jpg);
+			background-size:cover;
+			background-position:center center;
+			position:relative;
+		}
+		.overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.45),rgba(0,0,0,0.55));}
+		.hero-content{position:relative;z-index:2;padding:20px;max-width:1100px}
+		.title{font-size:clamp(28px,6vw,64px);font-weight:800;letter-spacing:0.5px;margin:0}
+		.subtitle{margin-top:12px;color:rgba(255,255,255,0.9);font-size:18px}
+		/* Botón principal - usa la variable --cta-color */
+		.cta{display:inline-block;margin-top:20px;padding:12px 18px;background:var(--cta-color);color:var(--cta-text);border-radius:8px;text-decoration:none;font-weight:700}
+		/* Variante alternativa: fondo semitransparente oscuro detrás del texto */
+		.cta-alt{background:rgba(0,0,0,0.45);color:#fff;border:1px solid rgba(255,255,255,0.08)}
+
+		/* Menú top-right */
+		.topnav{position:absolute;top:18px;right:24px;z-index:5;display:flex;align-items:center;gap:12px}
+		.topnav #menu-toggle{display:none;background:transparent;border:0;color:#fff;font-size:22px;cursor:pointer}
+		.menu-list{list-style:none;margin:0;padding:0;display:flex;gap:14px}
+		.menu-list a{color:rgba(255,255,255,0.95);text-decoration:none;padding:8px 10px;border-radius:6px;transition:background .18s,color .18s}
+		/* Usar mismo color que el botón "Únete al club" en hover/active */
+		.menu-list a:hover, .menu-list a:focus, .menu-list a.active{background:var(--cta-color);color:var(--cta-text)}
+		.menu-list a:hover{outline:none}
+
+		/* Logo top-left (removed small logo) - keep class for future use */
+		.logo{display:none}
+
+		/* Top bar layout similar to the provided photo */
+		/* bajar el menú ligeramente (aprox 1cm) -> ahora subido 0.5cm */
+		:root{--site-top-gap:29px;--band-base:54px}
+		/* site-top positioned slightly below top; band will extend upwards to page top */
+		.site-top{position:absolute;top:var(--site-top-gap);left:0;right:0;display:grid;grid-template-columns:auto 1fr auto;align-items:center;padding:0 36px;z-index:6;height:calc(var(--band-base) + var(--site-top-gap));}
+		/* franja semitransparente detrás de la site-top; se extiende hasta la parte superior */
+		.site-top::before{content:'';position:absolute;left:0;right:0;top:0;height:calc(var(--band-base) + var(--site-top-gap));background:rgba(0,0,0,0.45);backdrop-filter:blur(4px);z-index:-1}
+		.site-top .main-menu ul{display:flex;gap:22px;margin:0;padding:0;list-style:none;align-items:center;justify-content:center}
+		.site-top .main-menu{justify-self:center}
+		.site-top .main-menu a{color:rgba(255,255,255,0.95);text-decoration:none;font-weight:600;line-height:1}
+		.site-top .contact-right{color:rgba(255,255,255,0.85);display:flex;gap:18px;align-items:center;font-size:14px;justify-self:end}
+		.site-top .logo{justify-self:start}
+
+		/* Hero inner: left skewed panel + right headline */
+		.hero-inner{display:grid;grid-template-columns:420px 1fr;gap:24px;align-items:center;width:100%;max-width:1200px;margin:0 auto;padding:40px 24px}
+		.left-panel{transform:skewX(-12deg);background:rgba(10,10,10,0.75);border-radius:6px;padding:28px 36px}
+		.left-panel .panel-content{transform:skewX(12deg);color:#fff;display:flex;flex-direction:row;align-items:center;gap:18px}
+		.left-panel .small{letter-spacing:2px;opacity:0.9}
+		.left-panel .big-logo img{width:160px;height:auto;display:block}
+
+		.right-panel .hero-headline{font-size:64px;margin:0;font-weight:800;line-height:0.95;text-align:right}
+		.right-panel .muted{font-size:28px;opacity:0.95}
+
+		@media (max-width:900px){
+			.hero-inner{grid-template-columns:1fr;}
+			.left-panel{transform:none}
+			:root{--site-top-gap:14px}
+			.left-panel .panel-content{transform:none;flex-direction:column;align-items:flex-start}
+			.right-panel .hero-headline{text-align:left;font-size:34px}
+			.site-top{padding:0 16px}
+		}
+
+		@media (max-width:800px){
+			.topnav{right:14px;top:14px}
+			.topnav #menu-toggle{display:inline-block}
+			.menu-list{position:absolute;top:56px;right:0;flex-direction:column;background:linear-gradient(180deg,rgba(0,0,0,0.6),rgba(0,0,0,0.55));padding:8px;border-radius:8px;min-width:160px;display:none}
+			.menu-list a{padding:10px 14px}
+			.title{font-size:28px}
+			.subtitle{font-size:15px}
+		}
+
+		/* Home card styles (added) */
+		.home-card{background:linear-gradient(180deg,rgba(255,255,255,0.98),rgba(250,250,250,0.95));padding:28px;border-radius:12px;box-shadow:0 8px 30px rgba(16,24,40,0.12);color:#072030}
+		.home-card h2{margin-top:0;font-size:34px;color:#0b2540}
+		.home-card p{line-height:1.7;margin-top:14px;color:#374151}
+		@media (max-width:900px){.home-card{padding:18px}.home-card h2{font-size:22px}}
+	</style>
+</head>
+<body>
+	<header class="hero" role="banner">
+		<div class="site-top">
+			<a href="#" class="logo" aria-label="Club de Atletismo Alhambra">
+				<img src="assets/img/granada-skyline.svg" alt="Granada skyline logo (small)">
+			</a>
+
+			<nav class="main-menu" role="navigation" aria-label="Menú principal">
+				<ul>
+					<li><a href="#home">Home</a></li>
+					<li><a href="#el-club">El Club</a></li>
+					<li><a href="#noticias">Noticias</a></li>
+					<li><a href="#galerias">Galerías</a></li>
+					<li><a href="#inscribete">Inscríbete</a></li>
+				</ul>
+			</nav>
+
+			<div class="contact-right">
+				<div class="contact-item">Teléfono <strong>+34 637 807 307</strong></div>
+				<div class="contact-item">secretaria@atletismogranadajoven.com</div>
+			</div>
+		</div>
+
+		<div class="overlay" aria-hidden="true"></div>
+
+		<div class="hero-inner">
+			<div class="left-panel">
+				<div class="panel-content">
+					<div class="small">BIENVENIDO A</div>
+					<div class="big-logo">
+						<img src="assets/img/granada-skyline.svg" alt="Granada skyline logo (large)">
+					</div>
+				</div>
+			</div>
+			<div class="right-panel">
+				<h1 class="hero-headline">Entrena, crece, compite...<br><span class="muted">Disfruta con tus amigos</span></h1>
+			</div>
+		</div>
+	</header>
+
+	<style>
+		/* Smooth scroll for anchor navigation */
+		html{scroll-behavior:smooth}
+		.section{padding:80px 20px;max-width:1100px;margin:0 auto}
+		.section h2{font-size:28px;margin-bottom:12px}
+		.section p{color:rgba(0,0,0,0.75)}
+		/* El Club - moderno */
+		.club-wrap{display:grid;grid-template-columns:1fr;gap:18px}
+		.club-top{display:grid;grid-template-columns:1fr 360px;gap:24px;align-items:start}
+		.club-card{background:linear-gradient(180deg,#ffffff,#fbfdff);border-radius:12px;padding:22px;box-shadow:0 10px 30px rgba(11,37,64,0.08);border:1px solid rgba(11,37,64,0.04)}
+		.kit-card{border-radius:12px;overflow:hidden;background:linear-gradient(180deg,#f8fbff,#ffffff);display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:280px;box-shadow:0 12px 30px rgba(11,37,64,0.06)}
+		.kit-card .kit-inner{width:100%;padding:18px;display:flex;flex-direction:column;align-items:center;gap:10px}
+		.kit-placeholder{width:100%;height:220px;border-radius:10px;border:1px dashed rgba(11,37,64,0.08);display:flex;align-items:center;justify-content:center;padding:12px;background:linear-gradient(180deg,rgba(3,37,56,0.02),rgba(3,37,56,0.01));color:#073046}
+		.kit-placeholder strong{display:block;color:#072030}
+		.achievements-grid{display:flex;gap:12px;margin-top:14px;flex-wrap:wrap}
+		.ach-card{flex:1 1 160px;min-width:140px;background:linear-gradient(180deg,#fff,#f7fbff);border-radius:10px;padding:12px;display:flex;gap:12px;align-items:center;border:1px solid rgba(11,37,64,0.04)}
+		.ach-icon{width:48px;height:48px;border-radius:10px;display:inline-flex;align-items:center;justify-content:center;font-weight:800;color:#072030}
+		.ach-icon.gold{background:linear-gradient(180deg,#ffd54a,#ffb300)}
+		.ach-icon.silver{background:linear-gradient(180deg,#e6e6e6,#bfbfbf)}
+		.ach-title{font-size:15px;font-weight:700;color:#09243a}
+		.ach-sub{font-size:13px;color:#556675}
+		@media (max-width:980px){.club-top{grid-template-columns:1fr}.kit-placeholder{height:180px}.ach-card{flex-basis:45%}}
+		/* Tabla de inscripciones */
+		.signup-table{width:100%;border-collapse:collapse;margin-top:18px;background:#fff}
+		.signup-table th,.signup-table td{border:1px solid #e6e6e6;padding:10px;text-align:left}
+		.signup-table th{background:#f8f9fa}
+		.empty-msg{color:#6b7280;margin-top:8px}
+	</style>
+
+	<!-- Secciones ancladas -->
+	<section id="home" class="section" style="background:transparent;">
+		<div class="home-card">
+			<h2>Club de Atletismo Alhambra</h2>
+			<p>El Club de Atletismo Alhambra, ubicado en Granada, se caracteriza por ser mucho más que un simple club deportivo. En él, el compañerismo y la solidaridad entre sus miembros son valores esenciales que conforman la base de nuestra filosofía. Cada atleta que forma parte del club encuentra un ambiente acogedor y familiar, donde el apoyo mutuo y la motivación constante fortalecen no solo el rendimiento deportivo, sino también los lazos personales. Este espíritu de unidad convierte al Club de Atletismo Alhambra en una verdadera familia, en la que cada logro se celebra de manera colectiva y cada dificultad se supera juntos.</p>
+			<p>A pesar de este ambiente cercano y cordial, el club mantiene una firme vocación competitiva. Participamos activamente en múltiples competiciones a nivel nacional, representando con orgullo a nuestra ciudad y esforzándonos por alcanzar los más altos estándares de rendimiento. Nuestro compromiso con la excelencia nos impulsa a seguir creciendo y mejorando cada día, con el objetivo claro de conseguir un reconocimiento a nivel internacional que ponga en valor el trabajo y la dedicación de todos los atletas y entrenadores que forman parte de esta gran familia.</p>
+			<p>En resumen, el Club de Atletismo Alhambra es un espacio donde la convivencia, el compañerismo y la competitividad se combinan de manera equilibrada para fomentar el desarrollo integral de cada uno de sus miembros. Nuestro compromiso es seguir trabajando con pasión y dedicación para consolidar nuestra posición como uno de los clubes referentes del atletismo español y proyectar nuestra imagen más allá de nuestras fronteras.</p>
+		</div>
+	</section>
+
+	<section id="el-club" class="section">
+		<h2>El Club</h2>
+		<div class="club-wrap">
+			<div class="club-top">
+				<div class="club-card">
+					<h3 style="margin-top:0">Nuestra identidad y equipación</h3>
+					<p>El Club de Atletismo Alhambra trabaja con entrenadores titulados y un enfoque integral: técnica, fuerza y preparación mental. Nuestra equipación oficial mezcla azul marino y rojo vivo; el azul transmite profesionalidad y el rojo aporta visibilidad y fuerza en competición. Las prendas están optimizadas para movilidad y evacuación del sudor, con detalles reflectantes para entrenamientos nocturnos.</p>
+					<p style="margin-top:10px">A continuación tienes un resumen visual de los logros más destacados y un recuadro para añadir la imagen del uniforme.</p>
+					<div class="achievements-grid" aria-live="polite">
+						<div class="ach-card">
+							<div class="ach-icon gold">3</div>
+							<div>
+								<div class="ach-title">3x Oro - Velocidad</div>
+								<div class="ach-sub">Tres oros consecutivos en Campeonato de España (velocidad corta)</div>
+							</div>
+						</div>
+						<div class="ach-card">
+							<div class="ach-icon gold">1</div>
+							<div>
+								<div class="ach-title">Oro - Relevos 4x200</div>
+								<div class="ach-sub">Coordinación y cambio de testigo sobresalientes</div>
+							</div>
+						</div>
+						<div class="ach-card">
+							<div class="ach-icon silver">2</div>
+							<div>
+								<div class="ach-title">2x Plata - Relevos</div>
+								<div class="ach-sub">Podios adicionales en ediciones recientes</div>
+							</div>
+						</div>
+						<div class="ach-card">
+							<div class="ach-icon gold">1</div>
+							<div>
+								<div class="ach-title">Oro - Larga distancia</div>
+								<div class="ach-sub">Excelencia también en pruebas de fondo</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="kit-card">
+					<div class="kit-inner">
+						<div class="kit-placeholder" role="img" aria-label="Placeholder de la equipación del club">
+							<strong>Foto de la equipación</strong>
+							<p style="margin:8px 0 0;text-align:center">Colores: azul marino y rojo. Arrastra o sustituye esta imagen por la tuya.</p>
+						</div>
+						<div style="font-size:13px;color:#5b7180;text-align:center;margin-top:8px">Formato recomendado: 1200×800px. PNG o JPG.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section id="noticias" class="section">
+		<h2>Noticias</h2>
+		<p>Últimas noticias y comunicados.</p>
+	</section>
+
+	<section id="galerias" class="section">
+		<h2>Galerías</h2>
+		<p>Fotos y vídeos de eventos y competiciones.</p>
+	</section>
+
+	<section id="inscribete" class="section">
+		<h2>Inscríbete</h2>
+		<p>Formulario de inscripción e información para nuevos miembros.</p>
+
+		<form id="signup-form" style="max-width:640px;margin-top:18px;">
+			<div style="display:flex;gap:12px;flex-wrap:wrap">
+				<input type="text" id="nombre" name="nombre" placeholder="Nombres" required style="flex:1;padding:10px;border-radius:6px;border:1px solid #ccc">
+				<input type="text" id="apellidos" name="apellidos" placeholder="Apellidos" required style="flex:1;padding:10px;border-radius:6px;border:1px solid #ccc">
+			</div>
+			<div style="margin-top:12px;display:flex;gap:12px;flex-wrap:wrap">
+				<input type="tel" id="telefono" name="telefono" placeholder="Teléfono" required style="flex:1;padding:10px;border-radius:6px;border:1px solid #ccc">
+				<input type="email" id="email" name="email" placeholder="Correo electrónico" required style="flex:1;padding:10px;border-radius:6px;border:1px solid #ccc">
+			</div>
+			<button type="submit" class="cta" style="margin-top:14px">Enviar inscripción</button>
+			<div id="signup-message" role="status" aria-live="polite" style="margin-top:12px;color:green;display:none"></div>
+		</form>
+
+		<div id="table-wrapper" style="margin-top:18px;">
+			<table id="signup-table" class="signup-table" aria-live="polite">
+				<thead>
+					<tr>
+						<th>Nombres</th>
+						<th>Apellidos</th>
+						<th>Teléfono</th>
+						<th>Correo</th>
+						<th>Fecha</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+			<div id="empty-msg" class="empty-msg">No hay inscripciones aún.</div>
+		</div>
+
+		<script>
+		;(function(){
+			const STORAGE_KEY = 'inscripciones';
+			const form = document.getElementById('signup-form');
+			const msg = document.getElementById('signup-message');
+			const tbody = document.querySelector('#signup-table tbody');
+			const emptyMsg = document.getElementById('empty-msg');
+
+			function escapeHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') }
+
+			function render(){
+				const list = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+				tbody.innerHTML = '';
+				if(!list.length){ emptyMsg.style.display = 'block'; return }
+				emptyMsg.style.display = 'none';
+				list.forEach(entry => {
+					const tr = document.createElement('tr');
+					tr.innerHTML = `<td>${escapeHtml(entry.nombre)}</td><td>${escapeHtml(entry.apellidos)}</td><td>${escapeHtml(entry.telefono)}</td><td>${escapeHtml(entry.email)}</td><td>${escapeHtml(entry.fecha)}</td>`;
+					tbody.appendChild(tr);
+				});
+			}
+
+			form.addEventListener('submit', function(e){
+				e.preventDefault();
+				const nombre = document.getElementById('nombre').value.trim();
+				const apellidos = document.getElementById('apellidos').value.trim();
+				const telefono = document.getElementById('telefono').value.trim();
+				const email = document.getElementById('email').value.trim();
+				if(!nombre || !apellidos || !telefono || !email){ msg.style.display='block'; msg.style.color='crimson'; msg.textContent = 'Por favor completa todos los campos.'; return }
+				const telOk = /^\+?[0-9 \-]{6,20}$/.test(telefono);
+				const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+				if(!telOk){ msg.style.display='block'; msg.style.color='crimson'; msg.textContent = 'Introduce un teléfono válido.'; return }
+				if(!emailOk){ msg.style.display='block'; msg.style.color='crimson'; msg.textContent = 'Introduce un correo válido.'; return }
+				const entry = { nombre, apellidos, telefono, email, fecha: new Date().toLocaleString() };
+				const list = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+				list.unshift(entry);
+				localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+				msg.style.display='block'; msg.style.color='green'; msg.textContent = 'Inscripción recibida. ¡Gracias!';
+				form.reset();
+				render();
+			});
+
+			// render on load
+			render();
+		})();
+		</script>
+
+	</section>
+
+</body>
+</html>
