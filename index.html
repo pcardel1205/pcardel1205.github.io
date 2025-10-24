@@ -6,12 +6,28 @@
 	<title>Club de Atletismo Alhambra</title>
 	<meta name="description" content="Club de Atletismo Alhambra - Sitio oficial" />
 	<style>
+		/* Fondo global tenue: mantiene la imagen de portada visible al desplazarse */
+		body::before{
+			content:'';
+			position:fixed;
+			inset:0;
+			background-image:url(https://centroatletismotenerife.net/wp-content/uploads/2022/03/banner-atletismo-adultos.jpg);
+			background-size:cover;
+			background-position:center center;
+			background-attachment:fixed;
+			opacity:0.60; /* un poco más fuerte, mantiene legibilidad */
+			z-index:-1;
+			pointer-events:none;
+			filter:brightness(0.95) saturate(0.95);
+		}
 		/* Estilos para hero full-screen */
 		:root{--cta-color:#cf0000;--cta-text:#04283a}
 		html,body{height:100%;margin:0;font-family:Inter,Segoe UI,Arial,sans-serif}
 		.hero{
 			height:100vh;
 			width:100%;
+			position:relative; /* asegurar stacking sobre body::before */
+			z-index:2;
 			display:flex;
 			align-items:center;
 			justify-content:center;
@@ -109,8 +125,8 @@
 			</nav>
 
 			<div class="contact-right">
-				<div class="contact-item">Teléfono <strong>+34 637 807 307</strong></div>
-				<div class="contact-item">secretaria@atletismogranadajoven.com</div>
+				<div class="contact-item">Teléfono <strong>+34 123 456 789</strong></div>
+				<div class="contact-item">inventado@atletismoalhambra.com</div>
 			</div>
 		</div>
 
@@ -119,7 +135,7 @@
 		<div class="hero-inner">
 			<div class="left-panel">
 				<div class="panel-content">
-					<div class="small">BIENVENIDO A</div>
+					<div class="small">BIENVENIDO AL CLUB ALHAMBRA</div>
 					<div class="big-logo">
 						<img src="assets/img/granada-skyline.svg" alt="Granada skyline logo (large)">
 					</div>
@@ -134,7 +150,17 @@
 	<style>
 		/* Smooth scroll for anchor navigation */
 		html{scroll-behavior:smooth}
-		.section{padding:80px 20px;max-width:1100px;margin:0 auto}
+		.section{padding:80px 20px;max-width:1100px;margin:0 auto;position:relative;z-index:1;background-color:transparent}
+		/* Tarjeta individual por sección para evitar una franja blanca continua */
+		.section-card{background-color:rgba(255,255,255,0.95);padding:28px;border-radius:12px;box-shadow:0 8px 30px rgba(16,24,40,0.08);margin:18px 0}
+		@media (max-width:900px){.section-card{padding:18px}}
+
+		/* Galería: grid responsivo y estilos de miniaturas */
+		.gallery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-top:18px}
+		.gallery-item{border-radius:10px;overflow:hidden;background:#f6f9fb;border:1px solid rgba(11,37,64,0.04);display:flex;flex-direction:column}
+		.gallery-item img{width:100%;height:160px;object-fit:cover;display:block}
+		.gallery-item figcaption{padding:10px 12px;font-size:14px;color:#28414f}
+		@media (max-width:480px){.gallery-item img{height:120px}}
 		.section h2{font-size:28px;margin-bottom:12px}
 		.section p{color:rgba(0,0,0,0.75)}
 		/* El Club - moderno */
@@ -171,51 +197,53 @@
 	</section>
 
 	<section id="el-club" class="section">
-		<h2>El Club</h2>
-		<div class="club-wrap">
-			<div class="club-top">
-				<div class="club-card">
-					<h3 style="margin-top:0">Nuestra identidad y equipación</h3>
-					<p>El Club de Atletismo Alhambra trabaja con entrenadores titulados y un enfoque integral: técnica, fuerza y preparación mental. Nuestra equipación oficial mezcla azul marino y rojo vivo; el azul transmite profesionalidad y el rojo aporta visibilidad y fuerza en competición. Las prendas están optimizadas para movilidad y evacuación del sudor, con detalles reflectantes para entrenamientos nocturnos.</p>
-					<p style="margin-top:10px">A continuación tienes un resumen visual de los logros más destacados y un recuadro para añadir la imagen del uniforme.</p>
-					<div class="achievements-grid" aria-live="polite">
-						<div class="ach-card">
-							<div class="ach-icon gold">3</div>
-							<div>
-								<div class="ach-title">3x Oro - Velocidad</div>
-								<div class="ach-sub">Tres oros consecutivos en Campeonato de España (velocidad corta)</div>
+		<div class="section-card">
+			<h2>El Club</h2>
+			<div class="club-wrap">
+				<div class="club-top">
+					<div class="club-card">
+						<h3 style="margin-top:0">Nuestra identidad y equipación</h3>
+						<p>El Club de Atletismo Alhambra trabaja con entrenadores titulados y un enfoque integral: técnica, fuerza y preparación mental. Nuestra equipación oficial mezcla azul marino y rojo vivo; el azul transmite profesionalidad y el rojo aporta visibilidad y fuerza en competición. Las prendas están optimizadas para movilidad y evacuación del sudor, con detalles reflectantes para entrenamientos nocturnos.</p>
+						<p style="margin-top:10px">A continuación tienes un resumen visual de los logros más destacados y un recuadro para añadir la imagen del uniforme.</p>
+						<div class="achievements-grid" aria-live="polite">
+							<div class="ach-card">
+								<div class="ach-icon gold">3</div>
+								<div>
+									<div class="ach-title">3x Oro - Velocidad</div>
+									<div class="ach-sub">Tres oros consecutivos en Campeonato de España (velocidad corta)</div>
+								</div>
 							</div>
-						</div>
-						<div class="ach-card">
-							<div class="ach-icon gold">1</div>
-							<div>
-								<div class="ach-title">Oro - Relevos 4x200</div>
-								<div class="ach-sub">Coordinación y cambio de testigo sobresalientes</div>
+							<div class="ach-card">
+								<div class="ach-icon gold">1</div>
+								<div>
+									<div class="ach-title">Oro - Relevos 4x200</div>
+									<div class="ach-sub">Coordinación y cambio de testigo sobresalientes</div>
+								</div>
 							</div>
-						</div>
-						<div class="ach-card">
-							<div class="ach-icon silver">2</div>
-							<div>
-								<div class="ach-title">2x Plata - Relevos</div>
-								<div class="ach-sub">Podios adicionales en ediciones recientes</div>
+							<div class="ach-card">
+								<div class="ach-icon silver">2</div>
+								<div>
+									<div class="ach-title">2x Plata - Relevos</div>
+									<div class="ach-sub">Podios adicionales en ediciones recientes</div>
+								</div>
 							</div>
-						</div>
-						<div class="ach-card">
-							<div class="ach-icon gold">1</div>
-							<div>
-								<div class="ach-title">Oro - Larga distancia</div>
-								<div class="ach-sub">Excelencia también en pruebas de fondo</div>
+							<div class="ach-card">
+								<div class="ach-icon gold">1</div>
+								<div>
+									<div class="ach-title">Oro - Larga distancia</div>
+									<div class="ach-sub">Excelencia también en pruebas de fondo</div>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="kit-card">
-					<div class="kit-inner">
-						<div class="kit-placeholder" role="img" aria-label="Placeholder de la equipación del club">
-							<strong>Foto de la equipación</strong>
-							<p style="margin:8px 0 0;text-align:center">Colores: azul marino y rojo. Arrastra o sustituye esta imagen por la tuya.</p>
+					<div class="kit-card">
+						<div class="kit-inner">
+							<div class="kit-placeholder" role="img" aria-label="Placeholder de la equipación del club">
+								<strong>Foto de la equipación</strong>
+								<p style="margin:8px 0 0;text-align:center">Colores: azul marino y rojo. Arrastra o sustituye esta imagen por la tuya.</p>
+							</div>
+							<div style="font-size:13px;color:#5b7180;text-align:center;margin-top:8px">Formato recomendado: 1200×800px. PNG o JPG.</div>
 						</div>
-						<div style="font-size:13px;color:#5b7180;text-align:center;margin-top:8px">Formato recomendado: 1200×800px. PNG o JPG.</div>
 					</div>
 				</div>
 			</div>
@@ -223,20 +251,49 @@
 	</section>
 
 	<section id="noticias" class="section">
-		<h2>Noticias</h2>
-		<p>Últimas noticias y comunicados.</p>
+		<div class="section-card">
+			<h2>Noticias</h2>
+			<p>Últimas noticias y comunicados.</p>
+			<article class="club-card" aria-labelledby="noticia-ciudadreal-2025">
+			<h3 id="noticia-ciudadreal-2025" style="margin-top:0">Laura Pérez, oro en 10.000 m; Sierra Azul, subcampeón por equipos</h3>
+			<div class="meta" style="color:#385164;margin-top:6px;font-size:14px"><time datetime="2025-10-20">Ciudad Real, 20 de octubre de 2025</time></div>
+			<p>El pasado fin de semana, el Club Atletismo Alhambra dejó su huella en el Campeonato Regional de Fondo, celebrado en Ciudad Real, con una destacada participación de sus atletas en todas las categorías.</p>
+			<p>La nota más brillante la puso <strong>Laura Pérez</strong>, quien se alzó con la medalla de oro en los 10.000 metros femeninos, con un tiempo de <strong>34:42</strong>, superando su mejor marca personal. En la categoría masculina, <strong>Andrés Lozano</strong> logró un meritorio cuarto puesto tras una intensa lucha en los últimos metros con los favoritos del campeonato.</p>
+			<p>Además, el club logró el <strong>segundo puesto por equipos</strong>, demostrando el excelente trabajo de sus entrenadores y la gran cohesión del grupo.</p>
+			<blockquote style="margin:16px 0;padding-left:14px;border-left:3px solid rgba(11,37,64,0.12);color:#15303f">
+				<p>“Estamos muy orgullosos de nuestros atletas. Los resultados reflejan el esfuerzo constante y la pasión que ponemos en cada entrenamiento”.</p>
+				<footer style="margin-top:6px;color:#385164">— Miguel Serrano, presidente del club</footer>
+			</blockquote>
+			<p>El próximo objetivo del equipo será el <strong>Cross Nacional de Itálica</strong>, donde esperan mantener el nivel y seguir cosechando éxitos.</p>
+			</article>
+		</div>
 	</section>
 
 	<section id="galerias" class="section">
-		<h2>Galerías</h2>
-		<p>Fotos y vídeos de eventos y competiciones.</p>
+		<div class="section-card">
+			<h2>Galerías</h2>
+			<p>Fotos y vídeos de eventos y competiciones.</p>
+			<div class="gallery-grid" aria-live="polite">
+				<figure class="gallery-item"><img src="https://i.ytimg.com/vi/156tsmYBAG8/maxresdefault.jpg" alt="Galería - imagen 1"><figcaption>Entrenamiento</figcaption></figure>
+				<figure class="gallery-item"><img src="https://www.fundeu.es/wp-content/uploads/2021/01/efespten343941_atletismo-web.jpg" alt="Galería - imagen 2"><figcaption>Competición</figcaption></figure>
+				<figure class="gallery-item"><img src="https://estaticos-cdn.prensaiberica.es/clip/825cd0c1-0ba4-4726-8d69-df9a3f433d40_16-9-aspect-ratio_default_0.jpg" alt="Galería - imagen 3"><figcaption>Podio</figcaption></figure>
+				<figure class="gallery-item"><img src="https://img.sorianoticias.com/imagenes/2019-06/Atletismo_Numantino-D7_-MuEXkAA62FN_large.jpg" alt="Galería - imagen 4"><figcaption>Equipo</figcaption></figure>
+				<figure class="gallery-item"><img src="https://images.ecestaticos.com/zDcv2OGJ7cdXlI2ywCTIzXhmFdk=/0x0:2272x1704/1200x900/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2Fb3a%2Fbd1%2F9ea%2Fb3abd19ea1b4c2d584f19fa1d613097d.jpg" alt="Galería - imagen 5"><figcaption>Carrera</figcaption></figure>
+				<figure class="gallery-item"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiA0AWXl1vIfh893CI_V_NtzNKvVIgv27tza3PmHVY6hhCRZyITX5MPYjQCLPuus0oInQ&usqp=CAU" alt="Galería - imagen 6"><figcaption>Calentamiento</figcaption></figure>
+				<figure class="gallery-item"><img src="https://img2.huffingtonpost.es/files/image_1200_800/uploads/2025/02/23/parte-del-equipo-de-voluntarios-de-la-rfea-este-domingo.jpeg" alt="Galería - imagen 7"><figcaption>Voluntarios</figcaption></figure>
+				<figure class="gallery-item"><img src="https://www.famu.es/wp-content/uploads/2022/06/Podio-Sub12-mixto-Cto.-Regional-Clubes-2022.jpg" alt="Galería - imagen 8"><figcaption>Podio por equipos</figcaption></figure>
+				<figure class="gallery-item"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFxw0m9_hPi7i5mmOtg4a1diCree9WekdljQ&s" alt="Galería - imagen 9"><figcaption>Premios</figcaption></figure>
+				<figure class="gallery-item"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuMtL45ACHj5MQ31BNqVKq_lfrfIVWXZoOag&s" alt="Galería - imagen 10"><figcaption>Grupo</figcaption></figure>
+			</div>
+		</div>
 	</section>
 
 	<section id="inscribete" class="section">
-		<h2>Inscríbete</h2>
-		<p>Formulario de inscripción e información para nuevos miembros.</p>
+		<div class="section-card">
+			<h2>Inscríbete</h2>
+			<p>Formulario de inscripción e información para nuevos miembros.</p>
 
-		<form id="signup-form" style="max-width:640px;margin-top:18px;">
+			<form id="signup-form" style="max-width:640px;margin-top:18px;">
 			<div style="display:flex;gap:12px;flex-wrap:wrap">
 				<input type="text" id="nombre" name="nombre" placeholder="Nombres" required style="flex:1;padding:10px;border-radius:6px;border:1px solid #ccc">
 				<input type="text" id="apellidos" name="apellidos" placeholder="Apellidos" required style="flex:1;padding:10px;border-radius:6px;border:1px solid #ccc">
@@ -263,7 +320,7 @@
 				<tbody></tbody>
 			</table>
 			<div id="empty-msg" class="empty-msg">No hay inscripciones aún.</div>
-		</div>
+			</div>
 
 		<script>
 		;(function(){
