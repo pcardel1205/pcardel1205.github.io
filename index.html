@@ -3,7 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EjerciciosRepaso</title>
+    <title>Ejercicios Repaso</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f0fdf4 0%, #e0f2fe 100%);
+            color: #1e293b;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #0f766e; /* Azul verdoso oscuro */
+            margin-bottom: 2rem;
+            text-align: center;
+            letter-spacing: -0.5px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        ul {
+            list-style: none;
+            width: 100%;
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        li {
+            width: 100%;
+        }
+
+        /* Ocultar elementos li vacíos automáticamente */
+        li:empty {
+            display: none;
+        }
+
+        li a {
+            display: block;
+            text-align: center;
+            background-color: #ffffff;
+            color: #0d9488; /* Azul verdoso principal */
+            text-decoration: none;
+            padding: 14px 20px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            transition: all 0.25s ease-in-out;
+            border: 1px solid #ccfbf1;
+        }
+
+        li a:hover {
+            background-color: #0d9488;
+            color: #ffffff;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(13, 148, 136, 0.2), 0 4px 6px -2px rgba(13, 148, 136, 0.1);
+        }
+
+        li a:active {
+            transform: translateY(-1px);
+        }
+    </style>
 </head>
 <body>
     <h1>Proyectos JavaScript</h1>
